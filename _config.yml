@@ -1,6 +1,6 @@
 # Site settings
 title: Awesome OpenClaw Tutorial
-description: 从零开始玩转OpenClaw：最全面的中文教程
+description: 从零开始玩转 OpenClaw：最全面的中文教程
 baseurl: ""
 url: "https://awesome.tryopenclaw.asia"
 repository: xianyu110/awesome-openclaw-tutorial
@@ -27,8 +27,6 @@ kramdown:
 navigation:
   - title: 首页
     url: /
-  - title: 搜索
-    url: /search
   - title: 快速开始
     url: /docs/01-basics/03-quick-start
   - title: 核心功能
@@ -37,6 +35,8 @@ navigation:
     url: /docs/03-advanced/08-skills-extension
   - title: 实战案例
     url: /docs/04-practical-cases/12-personal-productivity
+  - title: 附录
+    url: /appendix/A-command-reference
 
 # Relative links
 relative_links:
@@ -53,21 +53,91 @@ titles_from_headings:
   strip_title: true
   collections: true
 
-# Exclude from processing
-exclude:
-  - .git
-  - .gitignore
-  - PROGRESS.md
-  - PROJECT-SUMMARY.md
-  - LICENSE
-  - Gemfile
-  - Gemfile.lock
-  - node_modules
-  - vendor
-
 # Include
 include:
   - _config.yml
   - README.md
+  - index.md
   - docs
   - appendix
+
+# Exclude from processing
+exclude:
+  - .git
+  - .gitignore
+  - .claude
+  - .vscode
+  - .github
+  - backups
+  - scripts
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - LICENSE
+  - "*.sh"
+  - ALL-CHAPTER-FIXES-FINAL-REPORT.md
+  - ALL-CHAPTERS-FIX-COMPLETED.md
+  - ALL-CHAPTERS-FORMATTING-COMPLETED.md
+  - ALL-FIXES-COMPLETED.md
+  - ANTIGRAVITY-MANAGER-REMOVED.md
+  - BATCH-INSTALL-FIX-COMPLETED.md
+  - CHAPTER-10-ALL-FIXES-COMPLETED.md
+  - CHAPTER-10-COMMAND-FIX-SUMMARY.md
+  - CHAPTER-10-FINAL-STATUS.md
+  - CHAPTER-10-FIX-REPORT.md
+  - CHAPTER-10-FIXES.md
+  - CHAPTER-10-SECTION-NUMBER-FIX.md
+  - CHAPTER-15-CONFLICT-RESOLVED.md
+  - CHAPTER-2-QUALITY-CHECK.md
+  - CHAPTER-5-COMPLIANCE-DEMO.md
+  - CHAPTER-5-FORMATTING-COMPLETED.md
+  - CHAPTER-DUPLICATION-ANALYSIS.md
+  - CHAPTER-DUPLICATION-FIX-COMPLETED.md
+  - CHAPTER-FORMAT-UNIFIED.md
+  - CHAPTER-NUMBER-INCONSISTENCY-REPORT.md
+  - CHAPTER-NUMBERING-FINAL-FIX.md
+  - CHAPTER-NUMBERING-UNIFIED-FINAL.md
+  - CHAPTER-RENUMBERING-COMPLETED.md
+  - CHAPTER-RENUMBERING-PLAN.md
+  - CHAPTER-TITLES-FIXED.md
+  - CODE-LANGUAGE-FIX-COMPLETED.md
+  - COMMAND-FIXES-COMPLETED.md
+  - COMMAND-VALIDATION-FINAL-REPORT.md
+  - COMMAND-VALIDATION-LIVE.md
+  - COMMAND-VALIDATION-REPORT.md
+  - COMMAND-VERIFICATION-REPORT-UPDATED.md
+  - COMMAND-VERIFICATION-REPORT.md
+  - COMPLIANCE-FIX-PLAN.md
+  - CONTENT-ANALYSIS.md
+  - CONTENT-QUALITY-REPORT.md
+  - CORE-FEATURES-NUMBERING-FIXED.md
+  - CRITICAL-FIXES-COMPLETED.md
+  - CROSS-REFERENCE-AND-URL-CLEANUP-PLAN.md
+  - CROSS-REFERENCE-CHECK-COMPLETED.md
+  - CROSS-REFERENCE-FIXES-COMPLETED.md
+  - CROSS-REFERENCE-URL-CLEANUP-COMPLETED.md
+  - DIRECTORY-OPTIMIZATION-COMPLETED.md
+  - DOCX-CONVERSION-COMPLETED.md
+  - ELEMENTS-STATISTICS.md
+  - FINAL-CHAPTER-NUMBERING-REPORT.md
+  - FINAL-OPTIMIZATION-SUMMARY.md
+  - FINAL-SUMMARY.md
+  - FIXES-README.md
+  - IMPROVEMENTS-SUMMARY.md
+  - LIST-STYLE-ISSUES-REPORT.md
+  - OPTIMIZATION-PROGRESS.md
+  - SECTION-NUMBERING-FIXED.md
+  - SECTION-NUMBERING-ISSUES.md
+  - SKILLS-CLEANUP-COMPLETED.md
+  - SKILLS-VERIFICATION-NEEDED.md
+  - SKILLS-VERIFICATION-RESULTS.md
+  - TSINGHUA-PRESS-COMPLIANCE-CHECK.md
+  - WORK-COMPLETED.md
+  - PROGRESS.md
+  - PROJECT-SUMMARY.md
+  - ANTIGRAVITY-MANAGER-REMOVED.md
+  - demo.md
+  - search-index.json
+  - search.json
+  - update-version-to-2026.3.2.sh

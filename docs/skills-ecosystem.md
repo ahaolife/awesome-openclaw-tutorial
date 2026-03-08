@@ -122,7 +122,7 @@ clawhub install community/skill-name
 ## 🔗 相关链接
 
 - [第8章：Skills扩展](03-advanced/08-skills-extension.md) - 详细的 Skills 使用指南
-- [ClawHub 市场](https://clawhub.com) - 官方 Skills 市场
+- [ClawHub 市场](https://clawhub.ai) - 官方 Skills 市场
 - [Skills 开发文档](https://docs.openclaw.ai/skills) - 开发自己的 Skills
 
 ---

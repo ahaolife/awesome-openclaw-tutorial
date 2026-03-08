@@ -228,7 +228,7 @@ my-skill/
 ### 8.1.1 什么是ClawHub
 
 **定义**：
-ClawHub是OpenClaw的官方技能市场（https://clawhub.com），类似于App Store，提供各种扩展功能。
+ClawHub是OpenClaw的官方技能市场（https://clawhub.ai），类似于App Store，提供各种扩展功能。
 
 **核心价值**：
 - 🎯 **扩展能力**：让OpenClaw能做更多事情
@@ -301,7 +301,7 @@ OpenClaw从3个位置加载Skills，优先级从高到低：
 
 ```bash
 # 方式1：网页访问（推荐）
-https://clawhub.com
+https://clawhub.ai
 
 # 方式2：命令行工具
 clawhub --help
@@ -1400,7 +1400,7 @@ module.exports = {
 
 ```bash
 # 1. 安装开发工具
-npm install -g openclaw-cli
+npm install -g openclaw
 
 # 2. 创建开发环境
 openclaw dev init
@@ -1994,7 +1994,7 @@ openclaw skill publish
 Skill信息：
 - 名称：hello-skill
 - 版本：v1.0.0
-- 链接：https://clawhub.com/skills/hello-skill
+- 链接：https://clawhub.ai/skills/hello-skill
 
 现在其他用户可以安装你的Skill了！
 ```text

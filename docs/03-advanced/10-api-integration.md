@@ -575,7 +575,7 @@ npm install @notionhq/client
 }
 ```text
 💡 **注意**：由于 ClawHub 市场的 Skills 在不断更新，建议：
-1. 访问 https://clawhub.com 查看最新可用的 Skills
+1. 访问 https://clawhub.ai 查看最新可用的 Skills
 2. 使用 `npx clawhub@latest search notion` 搜索相关 Skills
 3. 如果没有现成的 Skill，可以自己创建或使用 API 直接集成
 
@@ -2042,7 +2042,7 @@ openclaw tts generate \
 2. **ClawHub 市场动态变化**
    - Skills 可能被移除、更名或更新
    - 本文档中的某些 Skills 可能不存在
-   - 建议访问 https://clawhub.com 查看最新列表
+   - 建议访问 https://clawhub.ai 查看最新列表
 
 3. **替代方案**
    - 如果 Skill 不存在，可以使用服务的官方 API
