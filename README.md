@@ -781,6 +781,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 - **OpenClaw文档**：https://docs.openclaw.ai
 - **Awesome Skills**：https://github.com/VoltAgent/awesome-openclaw-skills
 - **Clawbot项目**：https://github.com/xianyu110/clawbot（700+ Stars，历史参考）
+- **sanwan.ai 实战案例**：https://sanwan.ai — AI 龙虾三万独立运营31天实录，展示 OpenClaw 长期自主运营的完整技能体系（心跳机制/多Agent/SOUL.md等）
 
 ## 📄 许可证
 
