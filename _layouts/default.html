@@ -558,6 +558,172 @@
       }
     }
 
+    /* ── 面包屑导航 ── */
+    .breadcrumb {
+      padding: 0.75rem 0;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+    }
+
+    .breadcrumb-item {
+      display: inline-flex;
+      align-items: center;
+      transition: all 0.2s;
+    }
+
+    .breadcrumb-item a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .breadcrumb-item a:hover {
+      color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    .breadcrumb-separator {
+      color: var(--color-text-muted);
+      margin: 0 0.25rem;
+      font-size: 0.75rem;
+    }
+
+    /* 面包屑图标 */
+    .breadcrumb-icon {
+      margin-right: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    /* ── 侧边目录导航 ── */
+    .toc-sidebar {
+      position: sticky;
+      top: 2rem;
+      max-height: calc(100vh - 4rem);
+      overflow-y: auto;
+      padding: 1.25rem;
+      background: var(--color-bg-alt);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      font-size: 0.85rem;
+    }
+
+    .toc-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-primary-dark);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--color-accent);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-item {
+      margin: 0.4rem 0;
+    }
+
+    .toc-item a {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      display: block;
+      padding: 0.35rem 0.5rem;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+      border-left: 2px solid transparent;
+    }
+
+    .toc-item a:hover {
+      color: var(--color-accent);
+      background: rgba(255,107,91,0.06);
+      border-left-color: var(--color-accent);
+      transform: translateX(2px);
+    }
+
+    .toc-item.level-2 {
+      padding-left: 1rem;
+    }
+
+    .toc-item.level-3 {
+      padding-left: 2rem;
+    }
+
+    /* 主内容布局 */
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .content-main {
+      min-width: 0;
+    }
+
+    /* ── 返回顶部按钮 ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 48px;
+      height: 48px;
+      background: var(--color-accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--color-accent-dark);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* ── 阅读进度条 ── */
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+      z-index: 9999;
+      transition: width 0.1s ease-out;
+    }
+
     /* ── 响应式 ── */
     @media screen and (max-width: 64em) {
       .main-content {
@@ -612,8 +778,203 @@
       .main-content table td {
         padding: 0.6rem 0.8rem;
       }
+      .content-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .toc-sidebar {
+        display: none;
+      }
     }
   </style>
+
+  <script>
+    // 面包屑导航生成
+    document.addEventListener('DOMContentLoaded', function() {
+      const content = document.querySelector('.main-content');
+      if (!content) return;
+
+      // 生成面包屑
+      generateBreadcrumbs();
+
+      // 生成侧边目录
+      generateTOC();
+
+      // 滚动高亮目录项
+      setupScrollSpy();
+
+      // 添加阅读进度条
+      setupReadingProgress();
+
+      // 添加返回顶部按钮
+      setupBackToTop();
+    });
+
+    function generateBreadcrumbs() {
+      const path = window.location.pathname;
+      if (path === '/' || path === '/index.html' || path === '') return;
+
+      const content = document.querySelector('.main-content');
+      const h1 = content.querySelector('h1');
+      if (!h1) return;
+
+      const breadcrumb = document.createElement('nav');
+      breadcrumb.className = 'breadcrumb';
+      breadcrumb.setAttribute('aria-label', '面包屑导航');
+
+      const pathParts = path.split('/').filter(p => p && p !== 'index.html');
+      const title = h1.textContent.trim();
+
+      let html = '<span class="breadcrumb-item"><a href="/" class="breadcrumb-icon">🏠</a></span>';
+
+      let currentPath = '';
+      pathParts.forEach((part, index) => {
+        currentPath += '/' + part;
+        const isLast = index === pathParts.length - 1;
+
+        html += '<span class="breadcrumb-separator">›</span>';
+
+        if (isLast) {
+          html += `<span class="breadcrumb-item active">${title}</span>`;
+        } else {
+          const displayName = part.replace('.html', '').replace(/-/g, ' ');
+          html += `<span class="breadcrumb-item"><a href="${currentPath}">${displayName}</a></span>`;
+        }
+      });
+
+      breadcrumb.innerHTML = html;
+
+      // 移除旧的面包屑
+      const oldBreadcrumb = content.querySelector('.breadcrumb');
+      if (oldBreadcrumb) oldBreadcrumb.remove();
+
+      // 插入新的面包屑
+      content.insertBefore(breadcrumb, h1);
+    }
+
+    function generateTOC() {
+      const content = document.querySelector('.main-content');
+      if (!content) return;
+
+      const headers = content.querySelectorAll('h2, h3, h4');
+      if (headers.length < 3) return; // 章节太少时不显示目录
+
+      let tocHtml = '<div class="toc-title">📑 目录</div>';
+      tocHtml += '<ul class="toc-list">';
+
+      headers.forEach(header => {
+        const level = parseInt(header.tagName.charAt(1));
+        const text = header.textContent.trim();
+        const id = header.id || text.toLowerCase().replace(/[^\w\u4e00-\u9fa5]+/g, '-');
+
+        if (!header.id) {
+          header.id = id;
+        }
+
+        tocHtml += `<li class="toc-item level-${level}"><a href="#${id}">${text}</a></li>`;
+      });
+
+      tocHtml += '</ul>';
+
+      // 检查是否已有侧边栏
+      const sidebar = document.querySelector('.toc-sidebar');
+      if (sidebar) {
+        sidebar.innerHTML = tocHtml;
+        return;
+      }
+
+      // 创建包装容器
+      const wrapper = document.createElement('div');
+      wrapper.className = 'content-wrapper';
+
+      // 侧边栏
+      const newSidebar = document.createElement('aside');
+      newSidebar.className = 'toc-sidebar';
+      newSidebar.innerHTML = tocHtml;
+
+      // 主内容区
+      const mainContent = document.createElement('div');
+      mainContent.className = 'content-main';
+
+      // 移动所有内容到主内容区
+      while (content.firstChild) {
+        mainContent.appendChild(content.firstChild);
+      }
+
+      // 组装
+      wrapper.appendChild(mainContent);
+      wrapper.appendChild(newSidebar);
+      content.appendChild(wrapper);
+    }
+
+    function setupScrollSpy() {
+      const tocLinks = document.querySelectorAll('.toc-item a');
+      const headers = document.querySelectorAll('.main-content h2, .main-content h3, .main-content h4');
+
+      if (tocLinks.length === 0 || headers.length === 0) return;
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            tocLinks.forEach(link => {
+              link.style.color = '';
+              link.style.borderLeftColor = '';
+            });
+
+            const activeLink = document.querySelector(`.toc-item a[href="#${id}"]`);
+            if (activeLink) {
+              activeLink.style.color = 'var(--color-accent)';
+              activeLink.style.borderLeftColor = 'var(--color-accent)';
+            }
+          }
+        });
+      }, {
+        rootMargin: '-20% 0px -80% 0px'
+      });
+
+      headers.forEach(header => observer.observe(header));
+    }
+
+    function setupReadingProgress() {
+      // 创建进度条
+      const progressBar = document.createElement('div');
+      progressBar.className = 'reading-progress';
+      document.body.appendChild(progressBar);
+
+      // 更新进度
+      window.addEventListener('scroll', () => {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        progressBar.style.width = scrolled + '%';
+      });
+    }
+
+    function setupBackToTop() {
+      // 创建返回顶部按钮
+      const backToTop = document.createElement('button');
+      backToTop.className = 'back-to-top';
+      backToTop.innerHTML = '↑';
+      backToTop.setAttribute('aria-label', '返回顶部');
+      document.body.appendChild(backToTop);
+
+      // 显示/隐藏按钮
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      });
+
+      // 点击返回顶部
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+  </script>
 </head>
 <body>
   <header class="page-header" role="banner">

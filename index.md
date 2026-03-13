@@ -168,7 +168,7 @@ openclaw gateway restart
 |------|------|
 | 正文章节 | 15 章，约 267,000 字 |
 | 基础附录 | 6 个（A-F），约 86,000 字 |
-| 高级附录 | 8 个（G-N），约 65,000 字 |
+| 高级附录 | 9 个（G-O），约 65,000 字 |
 | 安全指南 | 1 个，约 15,000 字 |
 | 实战案例 | 70+ 个，可直接复用 |
 | 配置截图 | 50+ 张，手把手教学 |
@@ -225,7 +225,7 @@ openclaw gateway restart
 | [附录E：常见问题速查](appendix/E-common-problems.md) | 安装/API/Skills/性能问题解决 |
 | [附录F：避坑指南与最佳实践](appendix/F-best-practices.md) | 新手必看，前人经验总结 |
 
-#### 高级附录（G-N）
+#### 高级附录（G-O）
 | 附录 | 内容 |
 |------|------|
 | [附录G：文档链接验证](appendix/G-links-validation.md) | 所有链接状态检查 |
@@ -236,6 +236,7 @@ openclaw gateway restart
 | [附录L：配置文件结构完整指南](appendix/L-config-file-structure.md) | 全局配置、Agent配置、认证配置详解 |
 | [附录M：搜索功能使用指南](appendix/M-search-guide.md) | 搜索���能使用技巧和常见问题 |
 | [附录N：Skills 生态说明](appendix/N-skills-ecosystem.md) | 内置49个、官方93个、社区1715+个Skills介绍 |
+| [附录O：国产 Claw 产品选购指南](appendix/O-domestic-claw-products.md) | 国产AI Agent产品特点和差异，选型建议 |
 
 #### 安全指南
 | 附录 | 内容 |
@@ -267,6 +268,17 @@ openclaw gateway restart
 
 ---
 
+## 👥 交流群
+
+欢迎加入OpenClaw交流群，与更多开发者一起交流学习！备注：小龙虾
+
+<div align="center">
+  <img src="https://upload.maynor1024.live/file/1772695436136_20260305152343578.jpg" alt="OpenClaw交流群二维码" width="300">
+  <p>扫码加入OpenClaw交流群</p>
+</div>
+
+---
+
 ## 💖 支持项目
 
 如果这个教程对你有帮助：
@@ -282,8 +294,8 @@ openclaw gateway restart
   <p>🚀 一个人 + OpenClaw = 无限可能 🚀</p>
 </div>
 
-**最后更新**：2026年3月10日
+**最后更新**：2026年3月13日
 **教程版本**：v1.5
-**总字数**：418,000字（正文267,000字 + 附录151,000字）
-**章节数**：15章正文 + 14个附录 + 1个安全指南
-**适用 OpenClaw 版本**：2026.3.7（推荐稳定版）
+**总字数**：423,000字（正文267,000字 + 附录156,000字）
+**章节数**：15章正文 + 15个附录 + 1个安全指南
+**适用 OpenClaw 版本**：2026.3.8（推荐稳定版）

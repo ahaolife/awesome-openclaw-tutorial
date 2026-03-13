@@ -37,6 +37,12 @@ navigation:
     url: /docs/04-practical-cases/12-personal-productivity
   - title: 附录
     url: /appendix/A-command-reference
+  - title: 国产Claw选购
+    url: /appendix/O-domestic-claw-products
+  - title: Skills生态
+    url: /appendix/N-skills-ecosystem
+  - title: 安全指南
+    url: /docs/03-advanced/99-security-guide
 
 # Relative links
 relative_links:
