@@ -27,7 +27,7 @@
     {
       "name": "内容助手",
       "model": "kimi",
-      "systemPrompt": "你���一个创意写作助手，擅长文章创作和内容优化。",
+      "systemPrompt": "你是一个创意写作助手，擅长文章创作和内容优化。",
       "workspace": "content"
     }
   ]

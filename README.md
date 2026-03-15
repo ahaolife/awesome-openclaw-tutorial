@@ -592,41 +592,47 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 
 ---
 
+
 ### 📖 附录：速查手册
 
-#### 基础附录
-- [附录A：命令速查表](appendix/A-command-reference.md) - 100+常用命令，5大类快速查找
-- [附录B：必装Skills清单](appendix/B-skills-catalog.md) - Top 10必装技能，附安装教程
-- [附录C：API服务商对比](appendix/C-api-comparison.md) - 10+服务商价格对比，帮你省钱
-- [附录D：社区资源导航](appendix/D-community-resources.md) - 官方文档、视频教程、交流群
-- [附录A：命令速查表](appendix/A-command-reference.md) - 常用命令快速查询
-- [附录B：常用Skills清单](appendix/B-skills-catalog.md) - 15个进阶Skills详解
-- [附录C：API对比指南](appendix/C-api-comparison.md) - 各种API优劣势分析
-- [附录D：社区资源导航](appendix/D-community-resources.md) - 官方资源汇总
-- [附录E：配置模板与自定义参考](appendix/E-config-templates.md) - 开箱即用的配置模板
-- [附录F：配套实操视频指南](appendix/F-video-tutorials.md) - 7个视频教程链接
-- [附录G：链接验证清单](appendix/G-links-validation.md) - 有效性验证
-- [附录H：飞书配置检查清单](appendix/H-feishu-checklist.md) - 飞书配置步骤
-- [附录I：思考题与答案](appendix/I-thinking-questions-answers.md) - 学习自测
-- [附录J：腾讯云���度解析](appendix/J-tencent-deep-dive.md) - 腾讯云版本详解
-- [附录K：API密钥配置指南](appendix/K-api-key-config-guide.md) - API配置详解
-- [附录L：配置文件结构](appendix/L-config-file-structure.md) - 配置文件说明
-- [附录M：搜索指南](appendix/M-search-guide.md) - 搜索技巧
-- [附录N：Skills生态](appendix/N-skills-ecosystem.md) - Skills生态详解
-- [附录O：国产Claw产品选购指南](appendix/O-domestic-claw-products.md) - 产品对比分析
+#### 基础附录（A-F）
 
-#### 高级附录
-- [附录G：文档链接验证](appendix/G-links-validation.md) - 所有链接状态检查
-- [附录H：配置文件模板](appendix/H-config-templates.md) - 开箱即用的配置示例
-- [附录I：思考题参考答案](appendix/I-thinking-questions-answers.md) - 各章节思考题详解
-- [附录J：飞书配置检查清单](appendix/J-feishu-checklist.md) - 确保飞书Bot配置完整
-- [附录K：API Key配置完整指南](appendix/K-api-key-config-guide.md) - 多种API Key配置方式详解
-- [附录L：配置文件结构完整指南](appendix/L-config-file-structure.md) - 全局配置、Agent配置、认证配置详解
-- [附录M：搜索功能使用指南](appendix/M-search-guide.md) - 搜索功能使用技巧和常见问题
-- [附录N：Skills生态说明](appendix/N-skills-ecosystem.md) - 内置49个、官方93个、社区1715+个Skills介绍
+| 附录 | 内容 |
+|------|------|
+| [附录A：命令速查表](appendix/A-command-reference.md) | 100+ 常用命令，5 大类快速查找 |
+| [附录B：必装 Skills 清单](appendix/B-skills-catalog.md) | Top10 必装技能，附安装教程 |
+| [附录C：API 服务商对比](appendix/C-api-comparison.md) | 10+ 服务商价格对比，帮你省钱 |
+| [附录D：社区资源导航](appendix/D-community-resources.md) | 官方文档、视频教程、交流群 |
+| [附录E：配置文件模板](appendix/E-config-templates.md) | 开箱即用的配置示例 |
+| [附录F：避坑指南与最佳实践](appendix/F-best-practices.md) | 新手必看，前人经验总结 |
+
+#### 视频教程附录
+
+| 附录 | 内容 |
+|------|------|
+| [附录F：配套实操视频指南](appendix/F-video-tutorials.md) | 7个视频教程链接，包含部署、接入和高级配置 |
+
+#### 高级附录（G-O）
+
+| 附录 | 内容 |
+|------|------|
+| [附录G：文档链接验证](appendix/G-links-validation.md) | 所有链接状态检查 |
+| [附录H：飞书配置检查清单](appendix/H-feishu-checklist.md) | 确保飞书Bot配置完整，避免常见问题 |
+| [附录I：思考题参考答案](appendix/I-thinking-questions-answers.md) | 各章节思考题详解 |
+| [附录J：API Key 配置完整指南](appendix/J-api-key-config-guide.md) | 多种API Key配置方式详解 |
+| [附录K：配置文件结构完整指南](appendix/K-config-file-structure.md) | 全局配置、Agent配置、认证配置详解 |
+| [附录L：搜索功能使用指南](appendix/L-search-guide.md) | 搜索功能使用技巧和常见问题 |
+| [附录M：Skills 生态说明](appendix/M-skills-ecosystem.md) | 内置49个、官方93个、社区1715+个Skills介绍 |
+| [附录N：国产 Claw 产品选购指南](appendix/N-domestic-claw-products.md) | 国产AI Agent产品特点和差异，选型建议 |
+| [附录O：常见问题速查](appendix/O-common-problems.md) | 安装/API/Skills/性能问题解决 |
 
 #### 安全指南
-- [安全指南：安全模型与已知事件](docs/03-advanced/99-security-guide.md) - 安全模型、已知安全事件、Skills安全与最佳实践
+
+| 附录 | 内容 |
+|------|------|
+| [安全指南](docs/03-advanced/99-security-guide.md) | 安全模型、已知安全事件、Skills安全与最佳实践 |
+
+
 
 ## 📊 项目数据
 
