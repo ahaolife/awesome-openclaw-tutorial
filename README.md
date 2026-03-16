@@ -23,10 +23,24 @@
 - ✅ **总字数**：约423,000字
 - ✅ **70+实战案例**：可直接应用
 - ✅ **完整配图**：50+张配置截图
-- 🔄 **持续优化**：删除重复内容，提升质量
+- 🔄 **持续优化**：删除重复内容，提���质量
 - 🆕 **新增内容**：多 Agent 配置（第9章）、超级个体实战案例（第15章）、AI绘图实战（第14章）、完整附录体系（附录A-O + F视频教程）
 
 👉 [查看完整项目总结](PROJECT-SUMMARY.md) | [查看最新更新](CHANGELOG.md)
+
+---
+
+## 📖 新书预告：《OpenClaw超级个体实操手册》
+
+⚠️ **本教程早期内容存在AI生成未验证的问题**（[#34](https://github.com/xianyu110/awesome-openclaw-tutorial/issues/34)），正在分批修正中。
+
+纸质书在此基础上做了**全面重写+逐条验证**：
+- 🔍 144条CLI命令对照官方文档逐条核对（教程中约60%已删除或修正）
+- ✅ 9套配置模板全部在v2026.3.7+实际跑通
+- 🛡️ 新增安全防护指南 + 国产Claw全景指南
+- 📦 7份随书附赠电子资料
+
+**清华大学出版社**，即将上市。⭐Star本仓库第一时间通知！
 
 ---
 
@@ -614,7 +628,7 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 |------|------|
 | [附录F：配套实操视频指南](appendix/F-video-tutorials.md) | 7个视频教程链接，包含部署、接入和高级配置 |
 
-#### 高级附录（G-O）
+#### 高级附录（G-N）
 
 | 附录 | 内容 |
 |------|------|
@@ -626,7 +640,6 @@ curl -fsSL https://openclaw.ai/install.sh | bash
 | [附录L：配置文件结构完整指南](appendix/L-config-file-structure.md) | 全局配置、Agent配置、认证配置详解 |
 | [附录M：搜索功能使用指南](appendix/M-search-guide.md) | 搜索功能使用技巧和常见问题 |
 | [附录N：Skills 生态说明](appendix/N-skills-ecosystem.md) | 内置49个、官方93个、社区1715+个Skills介绍 |
-| [附录O：国产 Claw 产品选购指南](appendix/O-domestic-claw-products.md) | 国产AI Agent产品特点和差异，选型建议 |
 
 #### 安全指南
 
