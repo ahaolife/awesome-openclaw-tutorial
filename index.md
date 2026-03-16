@@ -2,7 +2,7 @@
 layout: default
 title: 首页
 ---
-
+# 🦞 Awesome OpenClaw Tutorial
 # 🦞 一本书玩转 OpenClaw：超级个体实战指南
 
 > 从零开始打造你的 AI 工作助手——最全面的中文教程，涵盖安装、配置、实战案例和避坑指南
