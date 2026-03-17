@@ -33,7 +33,7 @@
 | 第4章：本地文件管理神器 | `docs/02-core-features/04-file-management.md` | ✅ 有效 |
 | 第5章：个人知识库 | `docs/02-core-features/05-knowledge-management.md` | ✅ 有效 |
 | 第6章：日程管理 | `docs/02-core-features/06-schedule-management.md` | ✅ 有效 |
-| 第7章：自动化工作�� | `docs/02-core-features/07-automation-workflow.md` | ✅ 有效 |
+| 第7章：自动化工作流 | `docs/02-core-features/07-automation-workflow.md` | ✅ 有效 |
 
 ### ✅ 第三部分：进阶技能（4章+安全指南）
 
@@ -63,7 +63,7 @@
 | 附录 | 文件路径 | 内容 | 状态 |
 |------|---------|------|------|
 | 附录A | `appendix/A-command-reference.md` | 命令速查表 | ✅ 有效 |
-| 附录B | `appendix/B-skills-catalog.md` | 必装Skills��单 | ✅ 有效 |
+| 附录B | `appendix/B-skills-catalog.md` | 必装Skills清单 | ✅ 有效 |
 | 附录C | `appendix/C-api-comparison.md` | API服务商对比 | ✅ 有效 |
 | 附录D | `appendix/D-community-resources.md` | 社区资源导航 | ✅ 有效 |
 | 附录E | `appendix/E-common-problems.md` | **常见问题速查** | ✅ 新增 |
@@ -122,7 +122,7 @@
    - 18个问题及解决方案
    - 安装、API、Gateway、Skills、平台集成、性能问题全覆盖
 
-### 验��方法
+### 验证方法
 ```bash
 # 验证所有章节文件存在
 for file in docs/**/*.md; do
