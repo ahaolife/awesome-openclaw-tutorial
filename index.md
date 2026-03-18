@@ -78,7 +78,7 @@ title: 首页
 - 🚀 [第15章：超级个体](docs/04-practical-cases/15-solo-entrepreneur-cases.md) - 一人顶一个团队
 
 ### 📚 附录工具（速查）
-- [命令速��表](appendix/A-command-reference.md) | [必装Skills](appendix/B-skills-catalog.md)
+- [命令速查表](appendix/A-command-reference.md) | [必装Skills](appendix/B-skills-catalog.md)
 - [常见问题](appendix/E-common-problems.md) | [API对比](appendix/C-api-comparison.md)
 - [配置模板](appendix/H-config-templates.md) | [避坑指南](appendix/F-best-practices.md)
 
