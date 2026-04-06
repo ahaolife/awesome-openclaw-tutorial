@@ -149,6 +149,60 @@ openclaw gateway restart
 
 ---
 
+### 🆕 v2026.3.12 重大更新（2026年3月）
+
+> 建议所有用户升级，包含大量安全修复
+
+**新功能**
+- **Control UI 全面重设计**：模块化 Dashboard，含概览/聊天/配置/Agent/Session 视图，支持命令面板、移动端底部 Tab、slash 命令、消息导出和消息置顶
+- **`/fast` 快速模式开关**：支持切换 OpenAI / Anthropic 的 fast tier，更省钱更快
+- **Kubernetes 支持**：新增 K8s 安装路径（支持 Kind 和 raw manifests）
+- **`sessions_yield` 工具**：Agent 可立即结束当前轮次并携带后续载荷，流程控制更灵活
+- **Slack Block Kit**：Slack 频道消息支持 Block Kit 富文本格式
+
+**重要安全修复**（建议立即升级）
+- 修复跨站 WebSocket 劫持路径
+- 修复 workspace plugin 隐式自动加载（防止恶意代码执行）
+- 修复 `/config`、`/debug` 权限绕过
+- 修复共享 token 范围自我提权
+- 多处 exec 审批绕过修复
+
+---
+
+### 🆕 v2026.3.13 更新（2026年3月中旬）
+
+**新功能**
+- **Chrome DevTools MCP attach 模式**：可直接连接已登录的 Chrome 浏览器进行自动化操作，无需重新登录
+- **Ollama 一键安装引导**：支持 Local 和 Cloud+Local 混合模式，本地模型更好用
+- **多模态记忆索引**：图片/音频内容可用 Gemini Embedding 进行语义检索
+- **Docker 时区支持**：新增 `OPENCLAW_TZ` 环境变量
+- **iOS 首次运行引导页**：新用户体验大幅提升
+
+**Bug 修复**
+- 修复工具密集型运行时 Dashboard UI 卡死/重渲染风暴
+- 修复 Windows 下 gateway 重启时弹出控制台黑窗口
+- 修复 setup code 可被重放攻击的安全漏洞
+- 插件 SDK 去重，修复约 2 倍内存膨胀问题
+
+---
+
+### 🆕 v2026.3.24 更新（2026年3月26日，当前最新）
+
+**重要变更**
+- **Node.js 最低版本要求提升**：macOS 现在要求 Node >= 22.16.0（Linux/Windows 要求 >= 22.14.0），如安装失败请先检查 Node 版本
+- 多平台（Discord / Telegram / Slack / 飞书）频道稳定性修复
+- exec approvals 安全策略多处收紧
+
+**升级命令**：
+```bash
+npm install -g openclaw@latest
+openclaw --version  # 确认版本为 2026.3.24
+```
+
+> ⚠️ **WSL/Linux 安装提示**：如升级后提示缺少 UI 资产，请确认 Node 版本 >= 22.14，然后重新执行 `npm install -g openclaw@latest`
+
+---
+
 ## 📖 关于本教程
 
 ### 🎯 教程特色
@@ -288,6 +342,29 @@ openclaw gateway restart
 - 🔄 分享给需要的人
 - 💬 提交 Issue 反馈问题
 - 🤝 贡献你的经验和案例
+
+---
+
+## 📈 项目进度
+
+- ✅ **v1.6**（2026-03-18）：新增一键部署教程（8个平台）
+- ✅ **v1.7**（2026-03-27）：同步 OpenClaw v2026.3.12 ~ v2026.3.24 版本更新内容，追加多版本重要提示
+- ✅ **v1.9**（2026-04-04）：同步橙皮书 v1.3~v1.4 更新——ClawBot 改为微信官方插件（iLink 协议）、新增 Chrome DevTools 附着模式、Dashboard v2 详解、腾讯全家桶、GLM-5-Turbo、安全漏洞统计、Skills 数据更新（55内置/13,700+ ClawHub）
+- 🔄 **v1.8**（进行中）：优化内容质量，补充实战案例
+
+---
+
+## 📄 许可证
+
+本项目采用 [GPL-3.0 License](LICENSE)
+
+### ⚠️ 重要声明：禁止倒卖
+
+- ❌ **严禁倒卖**：禁止将本教程打包后进行商业售卖
+- ❌ **严禁闭源商用**：任何基于本项目的衍生作品必须同样开源
+- ✅ **允许学习**：欢迎个人学习和使用
+- ✅ **允许分享**：欢迎分享给更多需要的人
+- ✅ **允许修改**：可以修改并分享，但必须保持开源
 
 ---
 
