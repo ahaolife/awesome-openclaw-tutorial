@@ -423,63 +423,28 @@ ls -lh test_output/chapters/
 # 在macOS上打开查看
 open test_output/chapters/
 ```
-### 14.1.5 更多AI绘画Skills推荐
+### 14.1.5 旧绘图 Skill 生态怎么参考（历史参考）
 
-根据ClawHub技能市场，以下是推荐的AI绘画相关Skills：
+这部分原来是大段 `clawhub install ...` 清单，但对 `2026.4+` 新用户来说不适合作为默认教程。现在更建议：
 
-**1. fal-ai - 多功能AI生成**
+1. 先用官方图像主路线：`openclaw infer image generate`
+2. 再考虑 Agent 直接调 `image_generate`
+3. 只有官方能力不满足时，再去 ClawHub 单独搜索某个旧 Skill
+
 ```bash
-# 安装
-npx clawhub@latest install fal-ai
+# 先搜索确认 Skill 是否还存在
+npx clawhub@latest search image
 
-# 功能
-• 图像生成（FLUX、SDXL等）
-• 视频生成
-• 音频生成
-• 支持多种模型
+# 再查看你准备安装的 Skill 详情
+npx clawhub@latest info <skill-name>
 ```
-**2. nvidia-image-gen - NVIDIA FLUX模型**
-```bash
-# 安装
-npx clawhub@latest install nvidia-image-gen
 
-# 特点
-• 使用NVIDIA FLUX模型
-• 高质量图像生成
-• 支持图像编辑
-```
-**3. pollinations - 多模态生成**
-```bash
-# 安装
-npx clawhub@latest install pollinations
+**旧生态里常见的方向**：
+- 聚合型图像/媒体服务
+- 某个 provider 的图像包装层
+- 同时支持生成、编辑、放大、转视频的一体化 Skill
 
-# 功能
-• 文本生成
-• 图像生成
-• 视频生成
-• 完全免费
-```
-**4. venice-ai - 图像视频一体化**
-```bash
-# 安装
-npx clawhub@latest install venice-ai
-
-# 功能
-• 图像生成、编辑、放大
-• 从图像创建视频
-• 多种风格支持
-```
-**5. recraft - 专业设计工具**
-```bash
-# 安装
-npx clawhub@latest install recraft
-
-# 功能
-• 图像生成
-• 矢量化
-• 图像放大
-• 背景替换
-```
+> ⚠️ **建议**：除非你明确知道自己要装哪一个 Skill，并且已经验证它仍在维护，否则不要再把整串 `install` 命令当作默认教程步骤。
 ### 14.1.6 批量生成配图实战
 
 ```
@@ -1257,90 +1222,39 @@ OpenClaw：好的，正在批量翻译...
 📦 下载链接：
 • 产品文档_多语言版.zip
 ```
-### 14.3.5 更多翻译Skills推荐
+### 14.3.5 旧翻译 Skill 生态怎么参考（历史参考）
 
-根据ClawHub技能市场，以下是推荐的翻译相关Skills：
+翻译这一块原来也是大段 `clawhub install ...` 清单。现在更建议先按任务类型选择方案：
 
-**1. translator - 通用翻译助手**
+- **普通文档翻译**：直接用当前文本模型在聊天里完成
+- **固定术语较多**：把术语表单独整理成文档，连同原文一起喂给模型
+- **确实需要垂直翻译 Skill**：去 ClawHub 单独搜索并验证
+
 ```bash
-# 安装
-npx clawhub@latest install translator
+# 先搜索相关 Skill
+npx clawhub@latest search translator
 
-# 功能
-• 多语言翻译
-• 实时翻译
-• 文档翻译
-• 术语库管理
+# 再看某个候选 Skill 的详情
+npx clawhub@latest info <skill-name>
 ```
-**2. straker-verify - 专业翻译**
-```bash
-# 安装
-npx clawhub@latest install straker-verify
 
-# 功能
-• 专业AI驱动翻译
-• 可选人工审核
-• 高质量保证
-```
-**3. japanese-translation-and-tutor - 日英翻译**
-```bash
-# 安装
-npx clawhub@latest install japanese-translation-and-tutor
-
-# 功能
-• 日英双向翻译
-• 日语学习辅导
-• 文化背景解释
-```
-**4. lyric-translator - 歌词翻译**
-```bash
-# 安装
-npx clawhub@latest install lyric-translator
-
-# 功能
-• 将印尼歌曲歌词翻译成英语
-• 保支持韵律和意境
-• 自然流畅的翻译
-```
-**5. tamil-whatsapp - 泰米尔语处理**
-```bash
-# 安装
-npx clawhub@latest install tamil-whatsapp
-
-# 功能
-• 处理WhatsApp上的泰米尔语消息
-• 音译支持
-• 实时翻译
-```
-**6. language-learning - 语言学习助手**
-```bash
-# 安装
-npx clawhub@latest install language-learning
-
-# 功能
-• AI语言导师
-• 学习任何语言
-• 个性化学习计划
-```
+**适合保留为历史参考的方向**：
+- 通用翻译助手
+- 某一语种对的垂直翻译 Skill
+- 翻译 + 审校一体化 Skill
+- 翻译 + 语言学习辅导类 Skill
 ### 14.3.6 配置方法
 
+当前更推荐的做法不是先写一堆 `translate.*` 配置键，而是：
+
+1. 先直接用当前主模型完成翻译任务
+2. 有术语要求时，把术语表整理成附加文档或提示词约束
+3. 确实需要第三方翻译 Skill 时，再去 ClawHub 单独搜索、看详情、再决定是否安装
+
 ```bash
-# 1. 配置翻译引擎
-clawhub install translator
-openclaw config set translate.engine "deepl"
-openclaw config set translate.quality "high"
-
-# 2. 配置术语库
-openclaw config set translate.glossary "团队术语库.csv"
-openclaw config set translate.auto-update-glossary true
-
-# 3. 配置批量翻译
-openclaw config set translate.batch-size 10
-openclaw config set translate.parallel-tasks 3
-
-# 4. 配置格式保留
-openclaw config set translate.keep-format true
-openclaw config set translate.keep-links true
+# 推荐先搜索，再决定是否安装某个翻译 Skill
+npx clawhub@latest search translator
+npx clawhub@latest info <skill-name>
 ```
 ### 14.3.6 效率提升数据
 
@@ -1621,127 +1535,39 @@ To: 销售团队全体成员
 Subject: 【销售周报】2026-02-03 至 2026-02-09
 Attachment: 销售周报.pdf
 ```
-### 14.4.5 更多数据分析Skills推荐
+### 14.4.5 旧数据分析 Skill 生态怎么参考（历史参考）
 
-根据ClawHub技能市场，以下是推荐的数据分析相关Skills：
+数据分析部分也不建议再直接照抄整串 `clawhub install ...`。当前更稳的顺序通常是：
 
-**1. data-analyst - 综合数据分析**
+1. 先明确你要处理的是 CSV、Excel、SQL、GA4 还是数据库
+2. 优先使用通用模型 + 你已有的数据工具链
+3. 只有确实需要某个垂直 Skill 时，再去 ClawHub 单独搜索并验证
+
 ```bash
-# 安装
-npx clawhub@latest install data-analyst
+# 先搜索相关方向
+npx clawhub@latest search data
 
-# 功能
-• 数据可视化
-• 报告生成
-• SQL查询
-• 电子表格分析
+# 再看目标 Skill 详情
+npx clawhub@latest info <skill-name>
 ```
-**2. senior-data-scientist - 高级数据科学**
-```bash
-# 安装
-npx clawhub@latest install senior-data-scientist
 
-# 功能
-• 世界级数据科学技能
-• 机器学习模型
-• 统计分析
-• 预测建模
-```
-**3. senior-data-engineer - 数据工程**
-```bash
-# 安装
-npx clawhub@latest install senior-data-engineer
-
-# 功能
-• 构建可扩展数据管道
-• ETL流程设计
-• 数据仓库管理
-• 性能优化
-```
-**4. csv-pipeline - CSV数据处理**
-```bash
-# 安装
-npx clawhub@latest install csv-pipeline
-
-# 功能
-• 处理CSV和JSON数据
-• 数据转换
-• 数据分析
-• 报告生成
-```
-**5. duckdb-en - DuckDB分析**
-```bash
-# 安装
-npx clawhub@latest install duckdb-en
-
-# 功能
-• DuckDB CLI专家
-• SQL分析
-• 数据处理
-• 高性能查询
-```
-**6. google-analytics-api - GA4分析**
-```bash
-# 安装
-npx clawhub@latest install google-analytics-api
-
-# 功能
-• Google Analytics 4集成
-• 托管认证
-• 数据查询
-• 报告生成
-```
-**7. supabase - 数据库操作**
-```bash
-# 安装
-npx clawhub@latest install supabase
-
-# 功能
-• 连接Supabase
-• 数据库操作
-• 向量搜索
-• 存储管理
-```
-**8. excel - Excel处理**
-```bash
-# 安装
-npx clawhub@latest install excel
-
-# 功能
-• 读写编辑Excel文件
-• 格式化
-• 公式计算
-• 数据分析
-```
-**9. data-lineage-tracker - 数据血缘追踪**
-```bash
-# 安装
-npx clawhub@latest install data-lineage-tracker
-
-# 功能
-• 跟踪数据来源
-• 转换记附录
-• 数据质量监控
-```
+**常见历史方向**：
+- 通用数据分析助手
+- DuckDB / SQL / CSV 处理 Skill
+- Excel / 报表 / 数据可视化 Skill
+- GA4 / Supabase / 数据工程类连接器
 ### 14.4.6 配置方法
 
+当前更推荐的思路是：
+
+1. 先用通用模型 + 现有数据文件完成分析
+2. 需要数据库或第三方系统接入时，再单独评估对应 Skill / 连接器
+3. 不要把旧教程里的 `data.engine`、`chart.library` 一类键当成当前官方稳定配置接口
+
 ```bash
-# 1. 配置数据分析
-clawhub install data-analyzer
-openclaw config set data.engine "pandas"
-
-# 2. 配置可视化
-openclaw config set chart.library "matplotlib"
-openclaw config set chart.style "professional"
-
-# 3. 配置自动报告
-openclaw schedule add "weekly-report" \
-  --time "Mon 09:00" \
-  --prompt "生成上周销售周报"
-
-# 4. 配置数据源
-openclaw config set data.source "sales_system"
-openclaw config set data.auto-sync true
+# 推荐先搜索，再决定是否安装某个数据分析 Skill
+npx clawhub@latest search data
+npx clawhub@latest info <skill-name>
 ```
 ### 14.4.6 效率提升数据
 

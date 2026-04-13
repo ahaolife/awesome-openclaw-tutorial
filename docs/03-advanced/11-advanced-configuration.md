@@ -77,6 +77,8 @@ openclaw exec-policy show
 
 ## 11.1 ~~Antigravity Manager完全配置指南~~（历史方案，不再推荐作为主线）
 
+> ⚠️ **快速判断**：如果你不是在维护已经跑起来的 Antigravity 旧部署，请直接跳到 `11.6`。下方 `11.1.2 ~ 11.1.13` 涉及历史 provider 名称、手工改 `openclaw.json`、旧 gateway 命令和旧代理思路，只适合作为存量项目参考。
+
 ### 11.1.1 什么是Antigravity Manager？
 
 **定义**：
@@ -195,161 +197,59 @@ User Token是OpenClaw访问Antigravity Manager的凭证。
 3. 复制生成的Token（例如：`sk-82bc103b51f24af888af525a7835e87c`）
 4. ⚠️ **重要**：妥善保存这个Token，它只会显示一次！
 
-### 11.1.6 配置 OpenClaw
+### 11.1.6 当前建议：不要再新增 `local-anthropic` / `local-google`
 
-#### 配置Claude Sonnet 4.5（默认模型）
-
-这是最常用的模型，适合日常对话和代码生成。
+如果你是 **新配置环境**，现在不建议再照着旧教程手工往 `~/.openclaw/openclaw.json` 里塞 `local-anthropic`、`local-google` 这类 provider。更稳妥的做法是直接走官方配置主线：
 
 ```bash
-# 添加local-anthropic provider
-cat ~/.openclaw/openclaw.json | jq '.models.providers["local-anthropic"] = {
-  "baseUrl": "http://127.0.0.1:8045",
-  "apiKey": "你的User_Token",
-  "auth": "api-key",
-  "api": "anthropic-messages",
-  "models": [
-    {
-      "id": "claude-sonnet-4-5-20250929",
-      "name": "Local Claude Sonnet 4.5",
-      "reasoning": false,
-      "input": ["text"],
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cacheRead": 0,
-        "cacheWrite": 0
-      },
-      "contextWindow": 200000,
-      "maxTokens": 8192
-    }
-  ]
-}' > /tmp/openclaw-temp.json && mv /tmp/openclaw-temp.json ~/.openclaw/openclaw.json
+# 1) 先走交互式向导
+openclaw onboard
 
-# 设置为默认模型
-openclaw config set agents.defaults.model.primary "local-anthropic/claude-sonnet-4-5-20250929"
-```
-**注意**：把`你的User_Token`替换成第三步生成的Token。
+# 2) 或者按 provider 单独登录
+openclaw models auth login --provider anthropic
+openclaw models auth login --provider google
 
-#### 配置Claude Opus 4.5 Thinking（推理模型）
-
-这是Claude的推理模型，适合复杂访问题和深度思考。
-
-```bash
-cat ~/.openclaw/openclaw.json | jq '.models.providers["local-anthropic-opus"] = {
-  "baseUrl": "http://127.0.0.1:8045",
-  "apiKey": "你的User_Token",
-  "auth": "api-key",
-  "api": "anthropic-messages",
-  "models": [
-    {
-      "id": "claude-opus-4-5-thinking",
-      "name": "Local Claude Opus 4.5 Thinking",
-      "reasoning": true,
-      "input": ["text"],
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cacheRead": 0,
-        "cacheWrite": 0
-      },
-      "contextWindow": 200000,
-      "maxTokens": 8192
-    }
-  ]
-}' > /tmp/openclaw-temp.json && mv /tmp/openclaw-temp.json ~/.openclaw/openclaw.json
-```
-#### 配置Gemini 3 Pro Image（多模态模型）
-
-这是Google的多模态模型，支持图片识别和分析。
-
-```bash
-cat ~/.openclaw/openclaw.json | jq '.models.providers["local-google"] = {
-  "baseUrl": "http://127.0.0.1:8045/v1beta",
-  "apiKey": "你的User_Token",
-  "auth": "api-key",
-  "api": "google-generative-ai",
-  "models": [
-    {
-      "id": "gemini-3-pro-image",
-      "name": "Local Gemini 3 Pro Image",
-      "reasoning": false,
-      "input": ["text", "image"],
-      "cost": {
-        "input": 0,
-        "output": 0,
-        "cacheRead": 0,
-        "cacheWrite": 0
-      },
-      "contextWindow": 2000000,
-      "maxTokens": 8192
-    }
-  ]
-}' > /tmp/openclaw-temp.json && mv /tmp/openclaw-temp.json ~/.openclaw/openclaw.json
-```
-### 11.1.7 验证配置
-
-#### 检查模型列表
-
-```bash
+# 3) 看当前可用模型
 openclaw models list
-```
-你应该看到：
 
+# 4) 设置默认文本模型
+openclaw config set agents.defaults.model.primary "anthropic/claude-sonnet-4-5"
+
+# 5) 如需切到 Google 系列模型，再切默认模型
+openclaw config set agents.defaults.model.primary "google/gemini-2.5-pro"
 ```
-Model                                      Input      Ctx      Local Auth  Tags
-local-anthropic/claude-sonnet-4-5-20250929 text       195k     yes   yes   default
-local-anthropic-opus/claude-opus-4-5-thinking text    195k     yes   yes   configured
-local-google/gemini-3-pro-image            text,image 1953k    yes   yes   configured
-```
-#### 重启Gateway
+
+**为什么这样更稳**：
+- 不需要自己维护旧代理 provider 名称
+- 不需要手工改大段 JSON
+- 后续升级到 `infer` CLI、视频模型、ComfyUI 时更顺滑
+
+> ⚠️ **历史说明**：下方如果仍出现 `local-anthropic`、`local-google`、`google-antigravity` 之类名称，请一律按“旧部署参考”理解，不要作为 2026.4+ 新环境的默认配置方式。
+
+### 11.1.7 当前主线的验证方法
 
 ```bash
-openclaw gateway restart
+# 查看已认证 / 已注册模型
+openclaw models list
+
+# 查看执行审批策略
+openclaw exec-policy show
 ```
-#### 测试连接
 
-```bash
-openclaw message send "你好，介绍一下你自己"
-```
-如果能正常返回回复，说明配置成功。
+**你应该重点确认**：
+- 目标 provider 已登录成功
+- 你要用的默认模型能在 `openclaw models list` 里看到
+- 没有继续依赖旧的本地代理名称
 
-### 11.1.8 使用方法
+### 11.1.8 历史方案什么时候还能看
 
-#### 使用默认模型（Claude Sonnet 4.5）
+以下情况可以继续参考 `11.1` 后面的旧内容：
 
-直接发布送消息即可：
+- 你手头已经有可用的 Antigravity Manager 旧部署
+- 你的团队内部仍在维护 `local-*` / `google-antigravity` 老配置
+- 你愿意自行验证旧 Token、旧 provider 名称、旧网关命令是否仍兼容
 
-```bash
-openclaw message send "写1个Python脚本，打印Hello World"
-```
-#### 切换到Opus Thinking模型
-
-适合需要深度思考的复杂访问题：
-
-```bash
-openclaw config set agents.defaults.model.primary "local-anthropic-opus/claude-opus-4-5-thinking"
-openclaw gateway restart
-```
-#### 切换到Gemini Image模型
-
-适合需要图片识别的场景：
-
-```bash
-openclaw config set agents.defaults.model.primary "local-google/gemini-3-pro-image"
-openclaw gateway restart
-```
-#### 临时使用特定模型
-
-不修改默认配置，临时使用某个模型：
-
-```bash
-# 使用Opus Thinking
-openclaw agent --model "local-anthropic-opus/claude-opus-4-5-thinking" --message "解释量子计算的原理"
-
-# 使用Gemini Image
-openclaw agent --model "local-google/gemini-3-pro-image" --message "分析这张图片" --image ./photo.jpg
-```
+如果不是以上情况，建议直接跳到 `11.6` 继续看当前官方配置主线。
 ### 11.1.9 模型选择指南
 
 #### Claude Sonnet 4.5
@@ -394,83 +294,41 @@ openclaw agent --model "local-google/gemini-3-pro-image" --message "分析这张
 - 识别准确
 - 上下文窗口：2000k tokens
 
-### 11.1.10 高级配置
+### 11.1.10 历史部署补充说明
 
-#### 配置模型别名
+如果你在维护旧的 Antigravity 部署，这里更推荐的原则是：
 
-给模型起1个好记的名字：
-
-```bash
-openclaw config set agents.defaults.models."local-anthropic/claude-sonnet-4-5-20250929".alias "我的Claude"
-```
-#### 添加多个API Key
-
-如果你有多个Antigravity账号，可以配置多个provider：
+- 先完整备份旧配置，再做任何 provider 级修改
+- 尽量记录你们团队真实在用的旧模型 ID，不要直接照抄教程示例
+- 能迁回官方 provider 的部分，优先迁回官方主线
 
 ```bash
-cat ~/.openclaw/openclaw.json | jq '.models.providers["local-anthropic-2"] = {
-  "baseUrl": "http://127.0.0.1:8045",
-  "apiKey": "另1个User_Token",
-  "auth": "api-key",
-  "api": "anthropic-messages",
-  "models": [...]
-}' > /tmp/openclaw-temp.json && mv /tmp/openclaw-temp.json ~/.openclaw/openclaw.json
-```
-#### 配置成本追踪
-
-虽然本地API成本为0，但你可以设置虚拟成本来追踪使用量：
-
-```json
-{
-  "cost": {
-    "input": 0.003,
-    "output": 0.015,
-    "cacheRead": 0.0003,
-    "cacheWrite": 0.00375
-  }
-}
-```
-#### 备份配置
-
-```bash
-cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup
-```
-#### 恢复配置
-
-```bash
-cp ~/.openclaw/openclaw.json.backup ~/.openclaw/openclaw.json
-openclaw gateway restart
-```
-### 11.1.11 常用命令速查
-
-```bash
-# 查看模型列表
+# 当前环境先确认模型清单
 openclaw models list
 
-# 查看当前默认模型
+# 再查看当前默认模型
 openclaw config get agents.defaults.model.primary
-
-# 切换默认模型
-openclaw config set agents.defaults.model.primary "模型ID"
-
-# 重启Gateway
-openclaw gateway restart
-
-# 查看配置文件
-cat ~/.openclaw/openclaw.json | jq '.models.providers'
-
-# 发布送消息
-openclaw message send "你的消息"
-
-# 临时使用特定模型
-openclaw agent --model "模型ID" --message "你的消息"
 ```
-### 11.1.12 模型ID速查
 
+### 11.1.11 历史命令怎么理解
+
+本节前文出现过的 `gateway restart`、手工改 `openclaw.json`、旧 `local-*` provider 名称，都应理解为 **历史部署速查**，不再是新环境默认推荐步骤。
+
+对于 `2026.4+` 新环境，更建议优先使用：
+
+```bash
+openclaw onboard
+openclaw models auth login --provider <provider>
+openclaw models list
+openclaw config get agents.defaults.model.primary
 ```
-local-anthropic/claude-sonnet-4-5-20250929
-local-anthropic-opus/claude-opus-4-5-thinking
-local-google/gemini-3-pro-image
+
+### 11.1.12 当前更可靠的模型 ID 获取方式
+
+不要再默认相信本章里写死的旧 `local-*` 模型 ID。更可靠的做法是直接在你自己的环境里查询：
+
+```bash
+openclaw models list
 ```
 ### 11.1.13 故障排查
 
@@ -625,7 +483,7 @@ OpenClaw（Claude Sonnet）：你好！我是Claude...
         "primary": "anthropic/claude-opus-4-6",
         "fallbacks": [
           "openai-codex/gpt-5.3-codex",
-          "google-antigravity/claude-opus-4-6-thinking"
+          "google/gemini-2.5-pro"
         ]
       }
     },
@@ -637,7 +495,7 @@ OpenClaw（Claude Sonnet）：你好！我是Claude...
           "primary": "anthropic/claude-opus-4-6",
           "fallbacks": [
             "openai-codex/gpt-5.3-codex",
-            "google-antigravity/claude-opus-4-6-thinking"
+            "google/gemini-2.5-pro"
           ]
         }
       }
@@ -651,7 +509,7 @@ OpenClaw（Claude Sonnet）：你好！我是Claude...
    ↓ 失败
 2. 切换到备用模型1：openai-codex/gpt-5.3-codex
    ↓ 失败
-3. 切换到备用模型2：google-antigravity/claude-opus-4-6-thinking
+3. 切换到备用模型2：google/gemini-2.5-pro
    ↓ 失败
 4. 返回错误信息
 ```
@@ -740,7 +598,7 @@ openclaw config set agents.defaults.model.primary "anthropic/claude-opus-4-6"
 # 或使用 jq 命令
 cat ~/.openclaw/openclaw.json | jq '.agents.defaults.model.fallbacks = [
   "openai-codex/gpt-5.3-codex",
-  "google-antigravity/claude-opus-4-6-thinking"
+  "google/gemini-2.5-pro"
 ]' > /tmp/openclaw-temp.json && mv /tmp/openclaw-temp.json ~/.openclaw/openclaw.json
 
 # 重启 Gateway 使配置生效
@@ -757,7 +615,7 @@ openclaw config get agents.defaults.model
   "primary": "anthropic/claude-opus-4-6",
   "fallbacks": [
     "openai-codex/gpt-5.3-codex",
-    "google-antigravity/claude-opus-4-6-thinking"
+    "google/gemini-2.5-pro"
   ]
 }
 ```
