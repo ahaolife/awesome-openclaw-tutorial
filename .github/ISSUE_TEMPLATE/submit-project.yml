@@ -1,0 +1,31 @@
+name: 提交新项目
+description: 向 awesome-openclaw-tutorial 提交你的 OpenClaw 项目/案例/配置
+title: "[项目提交] "
+labels: ["add-project"]
+body:
+  - type: textarea
+    id: project-info
+    attributes:
+      label: 项目介绍
+      description: |
+        请描述你的项目，尽量包含以下信息（自由格式即可，AI 会自动整理）：
+        - 项目名称
+        - 项目简介（做了什么、解决什么问题）
+        - 项目链接（GitHub / 网页 / 其他）
+        - 使用的 OpenClaw 功能或版本
+        - 适合哪类用户
+        - 其他你觉得重要的信息
+      placeholder: |
+        我做了一个 xxx 项目，主要是用 OpenClaw 实现了 xxx 功能...
+        项目地址：https://github.com/xxx/xxx
+        ...
+    validations:
+      required: true
+  - type: textarea
+    id: extra-info
+    attributes:
+      label: 补充信息（可选）
+      description: 任何你想补充的内容，比如截图、使用说明等
+      placeholder: 截图链接、使用技巧等...
+    validations:
+      required: false

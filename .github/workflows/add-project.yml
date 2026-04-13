@@ -1,0 +1,77 @@
+name: Auto Add Project
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  process-project:
+    # 只处理带有 add-project 标签的 Issue
+    if: contains(github.event.label.name, 'add-project')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install openai
+
+      - name: Process issue with AI
+        env:
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_AUTHOR: ${{ github.event.issue.user.login }}
+          AI_API_KEY: ${{ secrets.MAYNOR_API_KEY }}
+          AI_BASE_URL: ${{ secrets.MAYNOR_API_BASE_URL }}
+          AI_MODEL: ${{ secrets.MAYNOR_API_MODEL }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python .github/scripts/process_project.py
+
+      - name: Create PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BRANCH_NAME="add-project-${{ github.event.issue.number }}"
+
+          # 从 Python 脚本生成的 JSON 文件读取数据（安全的，不直接注入 issue 内容）
+          PR_TITLE=$(python3 -c "
+          import json
+          with open('/tmp/project_data.json') as f:
+              data = json.load(f)
+          print(f'[项目提交] {data[\"display_name\"]}')
+          ")
+
+          PR_BODY=$(python3 -c "
+          import json
+          with open('/tmp/project_data.json') as f:
+              data = json.load(f)
+          body = (
+              f'## 自动提交的项目\n\n'
+              f'- **项目名称**: {data[\"display_name\"]}\n'
+              f'- **项目分类**: {data[\"category\"]}\n'
+              f'- **项目链接**: {data.get(\"link\", \"无\")}\n'
+              f'- **提交者**: @${{ github.event.issue.user.login }}\n'
+              f'- **文件夹**: \`projects/{data[\"name\"]}/\`\n\n'
+              f'---\n\n'
+              f'Closes #${{ github.event.issue.number }}\n'
+          )
+          print(body)
+          ")
+
+          gh pr create \
+            --title "$PR_TITLE" \
+            --body "$PR_BODY" \
+            --base main \
+            --head "$BRANCH_NAME"
