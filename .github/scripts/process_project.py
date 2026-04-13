@@ -67,14 +67,23 @@ response = client.chat.completions.create(
 )
 
 # 兼容不同 API 返回格式
+print(f"DEBUG response type: {type(response)}")
+print(f"DEBUG response dir: {[a for a in dir(response) if not a.startswith('_')]}")
+print(f"DEBUG response str (前500字符): {str(response)[:500]}")
+
 if isinstance(response, str):
     content = response.strip()
 elif hasattr(response, "choices"):
     content = response.choices[0].message.content.strip()
 elif hasattr(response, "content"):
     content = response.content.strip()
+elif hasattr(response, "text"):
+    content = response.text.strip()
 else:
     content = str(response).strip()
+
+print(f"DEBUG content (前500字符): {content[:500]}")
+
 # 去掉可能的 markdown 代码块包裹
 if content.startswith("```"):
     content = re.sub(r"^```\w*\n?", "", content)
